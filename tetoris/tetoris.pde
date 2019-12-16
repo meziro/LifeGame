@@ -8,6 +8,8 @@ void draw(){
   pushMatrix();
   PMatrix3D mat =(PMatrix3D)getMatrix();
   mat.invert();
+  mat.mult( new PVector( 0, 0, 0 ), eye );
+  
   
   
 }
