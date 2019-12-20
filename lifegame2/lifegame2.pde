@@ -1,19 +1,93 @@
+import controlP5.*;
+
 boolean field[][];//フィールドの2次元配列
 boolean tmp_field[][];//次の状態を入れとく配列
 
 int size = 100;
 
+Toggle toggle;
+
+boolean switchState;
 void setup(){
   size(1000,1000);
   field = new boolean[size][size];
   tmp_field = new boolean[size][size];
+  //リセット処理
+  ControlP5 reset = new ControlP5(this);
+  reset.addButton("Reset")
+  .setPosition(0,10)
+  .setSize(100,30)
+  .setColorActive(color(128))
+  .setColorBackground(color(255))
+  .setColorCaptionLabel(color(0));
+  
+  //ストップ機能
+  /*ControlP5 stop = new ControlP5(this);
+  stop.addButton("Stop")
+  .setSize(100,30)
+  .setPosition(0,50)
+  .setColorCaptionLabel(color(0))
+  .setColorActive(color(128))
+  .setColorBackground(color(255));*/
+  //スタート 
+  /*ControlP5 start = new ControlP5(this);
+  start.addButton("Start")
+  .setSize(100,30)
+  .setPosition(0,70)
+  .setColorCaptionLabel(color(0))
+  .setColorActive(color(128))
+  .setColorBackground(color(255));
+  */
+
+   /*ControlP5 stop = new ControlP5(this);
+   stop.addToggle("stop")
+  .setLabel("stop")
+  .setSize(100,30)
+  .setPosition(0,80)
+  .setValue(false)
+  .setColorCaptionLabel(color(0))
+  .setColorActive(color(128))
+  .setColorBackground(color(255));*/
+  
+  //toggle = stop.addToggle
   
   for( int i = 0; i < size * size; i++ ){
     field[i/size][i%size] = int(random(2)) == 0;//ランダムに初期配置
   }
   frameRate(10);
 }
-
+/*void Stop(){
+  if(stop.getBooleanValue()){
+    noLoop();
+  }else{
+    loop();
+  }
+}*/
+/*
+void controlEvent(ControlEvent theEvent){
+  if(theEvent.getController().getName() == "Reset"){
+    Reset();
+}else if(theEvent.getController().getName() == "Stop"){
+  noLoop();
+}else if(theEvent.getController().getName() == "Start"){
+  loop();
+}
+}
+*/
+/*
+void Stop(){
+  noLoop();
+}*/
+void Reset(){
+  for(int i = 0; i < size; i++ ){
+    for(int j = 0; j < size; j++ ){
+      field[i][j] = false;
+    }
+  }
+  for( int i = 0; i < size * size; i++ ){
+    field[i/size][i%size] = int(random(2)) == 0;
+}
+}
 void draw(){
   background(0);
   int side = width/size;
