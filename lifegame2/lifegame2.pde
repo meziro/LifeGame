@@ -51,8 +51,10 @@ void setup(){
   
   //toggle = stop.addToggle
   
-  for( int i = 0; i < size * size; i++ ){
-    field[i/size][i%size] = int(random(2)) == 0;//ランダムに初期配置
+  for( int i = 0; i < size; i++ ){
+    for( int j = 0; j < size; j++ ){
+    field[i][j] = int(random(2)) == 0;//ランダムに初期配置
+  }
   }
   frameRate(10);
 }
