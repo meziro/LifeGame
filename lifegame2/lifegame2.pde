@@ -12,6 +12,7 @@ void setup(){
   size(1000,1000);
   field = new boolean[size][size];
   tmp_field = new boolean[size][size];
+  
   //リセット処理
   ControlP5 reset = new ControlP5(this);
   reset.addButton("Reset")
@@ -21,36 +22,7 @@ void setup(){
   .setColorBackground(color(255))
   .setColorCaptionLabel(color(0));
   
-  //ストップ機能
-  /*ControlP5 stop = new ControlP5(this);
-  stop.addButton("Stop")
-  .setSize(100,30)
-  .setPosition(0,50)
-  .setColorCaptionLabel(color(0))
-  .setColorActive(color(128))
-  .setColorBackground(color(255));*/
-  //スタート 
-  /*ControlP5 start = new ControlP5(this);
-  start.addButton("Start")
-  .setSize(100,30)
-  .setPosition(0,70)
-  .setColorCaptionLabel(color(0))
-  .setColorActive(color(128))
-  .setColorBackground(color(255));
-  */
-
-   /*ControlP5 stop = new ControlP5(this);
-   stop.addToggle("stop")
-  .setLabel("stop")
-  .setSize(100,30)
-  .setPosition(0,80)
-  .setValue(false)
-  .setColorCaptionLabel(color(0))
-  .setColorActive(color(128))
-  .setColorBackground(color(255));*/
-  
-  //toggle = stop.addToggle
-  
+  randomSeed(0);
   for( int i = 0; i < size; i++ ){
     for( int j = 0; j < size; j++ ){
     field[i][j] = int(random(2)) == 0;//ランダムに初期配置
@@ -106,6 +78,19 @@ void draw(){
   
 }
 
+//セルを配置
+void mousePressed(){
+  int side = width / size;
+  int x = mouseX * size / width;
+  int y = mouseY * size / height;
+  if(Restriction(x,y)){
+    fill(0,255,0);
+    stroke(0,255,0);
+    rect(mouseX,mouseY,side,side);
+    field[x][y] = true;
+  }
+}
+
 //次の状態を計算する
 void Change(){
   for( int i = 0; i < size; i++ ){
@@ -140,7 +125,7 @@ boolean Check(int x, int y){
       count++;
     }
   }
-  
+  //生死の条件
   if(field[x][y] && (count == 2 ||count == 3)){
     return true;
   }else if(field[x][y] == false && count ==3){
