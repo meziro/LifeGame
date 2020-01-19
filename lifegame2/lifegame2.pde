@@ -30,28 +30,7 @@ void setup(){
   }
   frameRate(10);
 }
-/*void Stop(){
-  if(stop.getBooleanValue()){
-    noLoop();
-  }else{
-    loop();
-  }
-}*/
-/*
-void controlEvent(ControlEvent theEvent){
-  if(theEvent.getController().getName() == "Reset"){
-    Reset();
-}else if(theEvent.getController().getName() == "Stop"){
-  noLoop();
-}else if(theEvent.getController().getName() == "Start"){
-  loop();
-}
-}
-*/
-/*
-void Stop(){
-  noLoop();
-}*/
+
 void Reset(){
   for(int i = 0; i < size; i++ ){
     for(int j = 0; j < size; j++ ){
